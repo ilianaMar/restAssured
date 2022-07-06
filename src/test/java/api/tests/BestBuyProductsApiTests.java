@@ -42,12 +42,6 @@ public class BestBuyProductsApiTests extends TestBase{
     }
 
     @Test
-    @DisplayName("Test to get single product")
-    void testGetProductById() {
-
-    }
-
-    @Test
     @DisplayName("Test to get first product")
     void testGetFirstProduct() {
         Map<String, ?> firstDataElement =  JsonPath.read(jsonResponse, "$.data[0]");
