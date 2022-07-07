@@ -32,9 +32,6 @@ public class TrelloApiTests extends TestBase {
 
             // convert JSON file to map
             Map<?, ?> authData = gson.fromJson(reader, Map.class);
-
-            System.out.println("777 " + authData.get("key"));
-            System.out.println("777 " + authData.get("token"));
             apiKey = authData.get("key");
             apiToken = authData.get("token");
 
