@@ -17,6 +17,7 @@ public class FootballApiTests extends TestBase {
         String baseUri = "https://api.football-data.org/";
         String basePath = "/v4/";
         init(baseUri, basePath);
+        respSpec.statusCode(200);
     }
 
     @Test
@@ -45,7 +46,7 @@ public class FootballApiTests extends TestBase {
     void testGetMethodById() {
         Response resp = given().queryParam("areas", 2202).when().get("competitions");
         resp.prettyPrint();
-        resp.then().statusCode(200).assertThat().body("filters.areas[0]", equalTo(2202));
+        resp.then().assertThat().body("filters.areas[0]", equalTo(2202));
     }
 
     @Test
@@ -55,7 +56,7 @@ public class FootballApiTests extends TestBase {
 
         Response resp = given().pathParam("id", id).when().log().all().get("areas/{id}");
         resp.prettyPrint();
-        resp.then().statusCode(200).assertThat().body("id", equalTo(id),
+        resp.then().assertThat().body("id", equalTo(id),
                 "name", equalTo("Sápmi"),
                 "code", equalTo("SAP"),
                 "parentAreaId", equalTo(2267),

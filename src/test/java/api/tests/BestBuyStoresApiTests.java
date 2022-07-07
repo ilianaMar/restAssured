@@ -3,13 +3,12 @@ package api.tests;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 
-public class BestBuyStoresApiTests extends TestBase{
+public class BestBuyStoresApiTests extends TestBase {
     static ValidatableResponse validatableResponse;
 
     @BeforeAll
@@ -17,8 +16,8 @@ public class BestBuyStoresApiTests extends TestBase{
         String baseUri = "http://localhost:3030/";
         String basePath = "";
         init(baseUri, basePath);
+        respSpec.statusCode(200);
         validatableResponse = given().when().get("stores").then();
-
     }
 
     @Test

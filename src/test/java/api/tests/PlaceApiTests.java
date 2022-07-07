@@ -67,7 +67,6 @@ public class PlaceApiTests extends TestBase {
         System.out.println("11111 " + newPlace);
         postResponse = given()
                 .contentType(ContentType.JSON)
-                .when()
                 .queryParam("key", "qaclick123")
                 .when()
                 .body(newPlace)
@@ -83,8 +82,6 @@ public class PlaceApiTests extends TestBase {
         postResponse.prettyPrint();
 
         Response getResponse = given()
-                .contentType(ContentType.JSON)
-                .when()
                 .queryParams("key", "qaclick123", "place_id", placeId)
                 .when()
                 .get("get/json");
@@ -123,7 +120,6 @@ public class PlaceApiTests extends TestBase {
         deleteData.put("place_id", placeId);
 
         Response deleteResponse = given()
-                .contentType(ContentType.JSON)
                 .when()
                 .body(deleteData)
                 .delete("delete/json");
@@ -134,7 +130,6 @@ public class PlaceApiTests extends TestBase {
 
         Response getResponse = given()
                 .contentType(ContentType.JSON)
-                .when()
                 .queryParams("key", "qaclick123", "place_id", placeId)
                 .when()
                 .get("get/json");
@@ -165,7 +160,6 @@ public class PlaceApiTests extends TestBase {
                 .build();
 
         given()
-                .contentType(ContentType.JSON)
                 .when()
                 .body(updatePlace)
                 .put("update/json")
@@ -175,7 +169,6 @@ public class PlaceApiTests extends TestBase {
 
         Response getResponse = given()
                 .contentType(ContentType.JSON)
-                .when()
                 .queryParams("key", "qaclick123", "place_id", placeId)
                 .when()
                 .get("get/json");

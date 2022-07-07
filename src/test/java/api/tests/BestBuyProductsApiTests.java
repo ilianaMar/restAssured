@@ -1,4 +1,5 @@
 package api.tests;
+
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.*;
 
@@ -8,7 +9,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
-public class BestBuyProductsApiTests extends TestBase{
+public class BestBuyProductsApiTests extends TestBase {
     static String jsonResponse;
 
     @BeforeAll
@@ -16,14 +17,14 @@ public class BestBuyProductsApiTests extends TestBase{
         String baseUri = "http://localhost:3030/";
         String basePath = "";
         init(baseUri, basePath);
+        respSpec.statusCode(200);
         jsonResponse = given().when().get("products").asString();
-
     }
 
     @Test
     @DisplayName("Get the root element")
     void testGetRootElement() {
-        Map<String,?> rootElement = JsonPath.read(jsonResponse, "$");
+        Map<String, ?> rootElement = JsonPath.read(jsonResponse, "$");
         System.out.println(rootElement.toString());
     }
 
@@ -37,21 +38,21 @@ public class BestBuyProductsApiTests extends TestBase{
     @Test
     @DisplayName("Test to get all products")
     void testGetAllProducts() {
-        List<HashMap<String, Object>> data =  JsonPath.read(jsonResponse, "$.data");
+        List<HashMap<String, Object>> data = JsonPath.read(jsonResponse, "$.data");
         data.forEach(System.out::println);
     }
 
     @Test
     @DisplayName("Test to get first product")
     void testGetFirstProduct() {
-        Map<String, ?> firstDataElement =  JsonPath.read(jsonResponse, "$.data[0]");
+        Map<String, ?> firstDataElement = JsonPath.read(jsonResponse, "$.data[0]");
         System.out.println(firstDataElement);
     }
 
     @Test
     @DisplayName("Test to get last product")
     void testGetLastProduct() {
-        Map<String, ?> lastDataElement =  JsonPath.read(jsonResponse, "$.data[-1]");
+        Map<String, ?> lastDataElement = JsonPath.read(jsonResponse, "$.data[-1]");
         System.out.println(lastDataElement);
     }
 
