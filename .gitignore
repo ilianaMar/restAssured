@@ -1,2 +1,3 @@
 /.idea
 /target
+/src/test/java/api/config/trello-auth.json

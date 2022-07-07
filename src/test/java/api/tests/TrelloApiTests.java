@@ -1,5 +1,6 @@
 package api.tests;
 
+import com.google.gson.Gson;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.json.JSONException;
@@ -7,6 +8,9 @@ import org.junit.jupiter.api.*;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +18,32 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 public class TrelloApiTests extends TestBase {
-    private static final String apiKey = "503566f0dd78ee5952e159a32806e40b";
-    private static final String apiToken = "92c3f97a17c5276e61007a26cc066c49d07c8106a7072ada12bbb842a4093a04";
+    private static Object apiKey = null;
+    private static Object apiToken = null;
 
     @BeforeAll
     public static void setup() {
+        try {
+            // create Gson instance
+            Gson gson = new Gson();
+
+            // create a reader
+            Reader reader = Files.newBufferedReader(Paths.get("src/test/java/api/config/trello-auth.json"));
+
+            // convert JSON file to map
+            Map<?, ?> authData = gson.fromJson(reader, Map.class);
+
+            System.out.println("777 " + authData.get("key"));
+            System.out.println("777 " + authData.get("token"));
+            apiKey = authData.get("key");
+            apiToken = authData.get("token");
+
+            // close reader
+            reader.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         String baseUri = "https://api.trello.com/";
         String basePath = "1/members/me/";
         init(baseUri, basePath);
@@ -257,6 +282,5 @@ public class TrelloApiTests extends TestBase {
 
             JSONAssert.assertEquals(expected, response.asString(), JSONCompareMode.LENIENT);
         }
-
     }
 }
