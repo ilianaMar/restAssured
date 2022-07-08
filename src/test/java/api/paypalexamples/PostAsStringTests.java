@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 public class PostAsStringTests extends PaypalTestBase {
     @BeforeAll
     public static void setup() {
-        init();
+        generateToken();
     }
 
     @Test
