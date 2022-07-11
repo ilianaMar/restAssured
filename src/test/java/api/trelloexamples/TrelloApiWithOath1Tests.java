@@ -18,7 +18,7 @@ public class TrelloApiWithOath1Tests extends TestBase {
         Map<?, ?> authData = new AuthHelper(path).getJson();
         Object apiKey = authData.get("key");
         Object apiToken = authData.get("token");
-        Object apiSecret =  authData.get("secret");
+        Object apiSecret = authData.get("secret");
         String baseUri = "https://api.trello.com/";
         String basePath = "1/members/";
         init(baseUri, basePath);
@@ -31,7 +31,7 @@ public class TrelloApiWithOath1Tests extends TestBase {
 
     @Test
     @DisplayName("Get my account info")
-    void getUserTrelloInfo(){
+    void getUserTrelloInfo() {
         given()
                 .get("me")
                 .then()
