@@ -45,7 +45,7 @@ public class LoggingRequestValuesTests extends TestBase {
                 .language("French-IN")
                 .name(String.format("%s %s", faker.name().firstName(), faker.name().lastName()))
                 .website("http://google.com")
-                .phone_number(faker.phoneNumber().cellPhone())
+                .phoneNumber(faker.phoneNumber().cellPhone())
                 .address(faker.address().streetAddress())
                 .accuracy(faker.number().numberBetween(1, 100))
                 .types(types)
@@ -106,7 +106,7 @@ public class LoggingRequestValuesTests extends TestBase {
         placeId = postJsonPathEvaluator.get("place_id");
 
         PlaceModel updatePlace = PlaceModel.builder()
-                .place_id(placeId)
+                .placeId(placeId)
                 .address(faker.address().streetAddress())
                 .key("qaclick123")
                 .build();
@@ -132,7 +132,7 @@ public class LoggingRequestValuesTests extends TestBase {
         placeId = postJsonPathEvaluator.get("place_id");
 
         PlaceModel updatePlace = PlaceModel.builder()
-                .place_id(placeId)
+                .placeId(placeId)
                 .address(faker.address().streetAddress())
                 .key("qaclick123")
                 .build();
@@ -158,7 +158,7 @@ public class LoggingRequestValuesTests extends TestBase {
         placeId = postJsonPathEvaluator.get("place_id");
 
         PlaceModel updatePlace = PlaceModel.builder()
-                .place_id(placeId)
+                .placeId(placeId)
                 .address(faker.address().streetAddress())
                 .key("qaclick123")
                 .build();

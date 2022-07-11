@@ -22,14 +22,14 @@ public class PostAsObjectTests extends PaypalTestBase {
     @Order(1)
     public void createAPayment() {
         RedirectUrls red_url = RedirectUrls.builder()
-                .cancel_url("http://www.hawaii.com")
-                .return_url("http://www.amazon.com")
+                .cancelUrl("http://www.hawaii.com")
+                .returnUrl("http://www.amazon.com")
                 .build();
 
         Details details = Details.builder()
-                .handling_fee("1.00")
+                .handlingFee("1.00")
                 .shipping("0.03")
-                .shipping_discount("-1.00")
+                .shippingDiscount("-1.00")
                 .tax("0.07")
                 .subtotal("30.00")
                 .insurance("0.01")
@@ -43,12 +43,12 @@ public class PostAsObjectTests extends PaypalTestBase {
 
         ShippingAddress shippingAddress = ShippingAddress.builder()
                 .city("San Jose")
-                .country_code("US")
+                .countryCode("US")
                 .line1("4thFloor")
                 .line2("unit34")
                 .phone("011862212345678")
                 .postal_code("95131")
-                .recipient_name("PAB")
+                .recipientName("PAB")
                 .state("CA")
                 .build();
 
@@ -77,19 +77,19 @@ public class PostAsObjectTests extends PaypalTestBase {
         items.add(secondItem);
 
         ItemList itemList = ItemList.builder()
-                .shipping_address(shippingAddress)
+                .shippingAddress(shippingAddress)
                 .items(items)
                 .build();
 
         PaymentOptions paymentOptions = PaymentOptions.builder()
-                .allowed_payment_method("INSTANT_FUNDING_SOURCE").build();
+                .allowedPaymentMethod("INSTANT_FUNDING_SOURCE").build();
 
         Transaction transaction = Transaction.builder()
-                .item_list(itemList)
+                .itemList(itemList)
                 .payment_options(paymentOptions)
                 .custom("EBAY_EMS_90048630024435")
-                .invoice_number("48787589674")
-                .soft_descriptor("ECHI5786786")
+                .invoiceNumber("48787589674")
+                .softDescriptor("ECHI5786786")
                 .amount(amount)
                 .description("This is the payment transaction description.")
                 .build();
@@ -97,13 +97,13 @@ public class PostAsObjectTests extends PaypalTestBase {
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction);
 
-        Payer payer = Payer.builder().payment_method("paypal").build();
+        Payer payer = Payer.builder().paymentMethod("paypal").build();
 
         PostObject postObject = PostObject.builder()
                 .intent("sale")
-                .note_to_payer("Contact us")
+                .noteToPayer("Contact us")
                 .payer(payer)
-                .redirect_urls(red_url)
+                .redirectUrls(red_url)
                 .transactions(transactions)
                 .build();
 

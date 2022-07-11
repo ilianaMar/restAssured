@@ -1,5 +1,6 @@
 package api.models.paypal;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +10,10 @@ import java.util.List;
 @Data
 public class PostObject {
     List<Transaction> transactions;
-    String note_to_payer, intent;
+    @JsonProperty("note_to_payer")
+    String noteToPayer;
+    String intent;
     Payer payer;
-    RedirectUrls redirect_urls;
+    @JsonProperty("redirect_urls")
+    RedirectUrls redirectUrls;
 }

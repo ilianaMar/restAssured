@@ -13,9 +13,11 @@ public class PlaceModel {
         double lat, lng;
     }
 
-    String name, address, website, language, place_id, key;
+    String name, address, website, language, key;
     @JsonProperty("phone_number")
-    String phone_number;
+    String phoneNumber;
+    @JsonProperty("place_id")
+    String placeId;
     List<String> types;
     public Location location;
     int accuracy;

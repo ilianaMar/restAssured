@@ -58,7 +58,7 @@ public class PlaceApiTests extends TestBase {
                 .language("French-IN")
                 .name(String.format("%s %s", faker.name().firstName(), faker.name().lastName()))
                 .website("http://google.com")
-                .phone_number(faker.phoneNumber().cellPhone())
+                .phoneNumber(faker.phoneNumber().cellPhone())
                 .address(faker.address().streetAddress())
                 .accuracy(faker.number().numberBetween(1, 100))
                 .types(types)
@@ -94,7 +94,7 @@ public class PlaceApiTests extends TestBase {
 //        using POJO
         assertEquals(Integer.parseInt(getJsonPathEvaluator.get("accuracy")), newPlace.getAccuracy());
         assertEquals(getJsonPathEvaluator.get("name"), newPlace.getName());
-        assertEquals(getJsonPathEvaluator.get("phone_number"), newPlace.getPhone_number());
+        assertEquals(getJsonPathEvaluator.get("phone_number"), newPlace.getPhoneNumber());
         assertEquals(getJsonPathEvaluator.get("address"), newPlace.getAddress());
         assertEquals(getJsonPathEvaluator.get("types"), String.format("%s,%s", newPlace.getTypes().get(0), newPlace.getTypes().get(1)));
         assertEquals(getJsonPathEvaluator.get("website"), newPlace.getWebsite());
@@ -154,7 +154,7 @@ public class PlaceApiTests extends TestBase {
 //        updateData.put("key", "qaclick123");
 
         PlaceModel updatePlace = PlaceModel.builder()
-                .place_id(placeId)
+                .placeId(placeId)
                 .address(faker.address().streetAddress())
                 .key("qaclick123")
                 .build();

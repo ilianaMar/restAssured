@@ -8,6 +8,6 @@ import java.util.List;
 @Builder
 @Data
 public class ItemList {
-    private ShippingAddress shipping_address;
+    private ShippingAddress shippingAddress;
     private List<Items> items;
 }

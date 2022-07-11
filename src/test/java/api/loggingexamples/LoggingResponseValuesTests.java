@@ -44,7 +44,7 @@ public class LoggingResponseValuesTests extends TestBase {
                 .language("French-IN")
                 .name(String.format("%s %s", faker.name().firstName(), faker.name().lastName()))
                 .website("http://google.com")
-                .phone_number(faker.phoneNumber().cellPhone())
+                .phoneNumber(faker.phoneNumber().cellPhone())
                 .address(faker.address().streetAddress())
                 .accuracy(faker.number().numberBetween(1, 100))
                 .types(types)
