@@ -1,6 +1,7 @@
-package api.tests;
+package api.trelloexamples;
 
 import api.config.AuthHelper;
+import api.tests.TestBase;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ExtractableResponse;
