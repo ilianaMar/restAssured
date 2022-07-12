@@ -2,6 +2,9 @@ package api.tests.bestBuyexamples;
 
 import api.tests.utils.TestBase;
 import com.jayway.jsonpath.JsonPath;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Link;
 import org.junit.jupiter.api.*;
 
 import java.util.HashMap;
@@ -10,7 +13,10 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
+@Epic("### Best Buy Api ###")
+@Feature("Products tests")
 @DisplayName("Best Buy Products Api Tests")
+@Link("https://github.com/BestBuy/api-playground")
 public class BestBuyProductsApiTests {
     static String jsonResponse;
     TestBase testBase = new TestBase();

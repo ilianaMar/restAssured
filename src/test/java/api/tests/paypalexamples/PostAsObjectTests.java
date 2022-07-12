@@ -2,6 +2,7 @@ package api.tests.paypalexamples;
 
 import api.models.paypal.*;
 import api.tests.utils.PaypalTestBase;
+import io.qameta.allure.Link;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
 
