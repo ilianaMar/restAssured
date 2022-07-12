@@ -10,6 +10,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
+@DisplayName("Paypal Api Tests Sample#1")
 public class PostAsObjectTests extends PaypalTestBase {
     static String paymentId;
 

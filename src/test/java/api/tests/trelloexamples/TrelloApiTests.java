@@ -2,6 +2,7 @@ package api.tests.trelloexamples;
 
 import api.tests.config.AuthHelper;
 import api.tests.utils.TestBase;
+import io.qameta.allure.Step;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ExtractableResponse;

@@ -16,6 +16,7 @@ import java.util.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Place Api Tests")
 public class PlaceApiTests {
     String placeId;
     Faker faker;

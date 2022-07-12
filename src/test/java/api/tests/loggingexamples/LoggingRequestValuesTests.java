@@ -14,6 +14,7 @@ import java.util.List;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 
+@DisplayName("Logging Request Values Api Tests")
 public class LoggingRequestValuesTests {
     String placeId;
     Faker faker;

@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
+@DisplayName("Best Buy Products Api Tests")
 public class BestBuyProductsApiTests {
     static String jsonResponse;
     TestBase testBase = new TestBase();

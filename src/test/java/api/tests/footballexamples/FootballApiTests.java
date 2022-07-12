@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 import static org.hamcrest.Matchers.*;
 
+@DisplayName("Football Api Tests")
 public class FootballApiTests {
     TestBase testBase = new TestBase();
 

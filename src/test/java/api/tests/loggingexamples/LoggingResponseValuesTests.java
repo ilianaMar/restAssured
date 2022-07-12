@@ -13,6 +13,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
+@DisplayName("Logging Response Values Api Tests")
 public class LoggingResponseValuesTests {
     String placeId;
     Faker faker;

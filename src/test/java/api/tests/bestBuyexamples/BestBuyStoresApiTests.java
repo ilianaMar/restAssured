@@ -9,6 +9,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
+@DisplayName("Best Buy Stores Api Tests")
 public class BestBuyStoresApiTests {
     static ValidatableResponse validatableResponse;
     TestBase testBase = new TestBase();
