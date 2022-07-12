@@ -21,7 +21,7 @@ import org.junit.jupiter.api.TestClassOrder;
 
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
 public class TrelloApiTests  {
-    private final String path = "src/test/java/api/config/trello-auth.json";
+    private final String path = "src/test/java/api/tests/config/trello-auth.json";
     private final Map<?, ?> authData = new AuthHelper(path).getJson();
     private final Object apiKey = authData.get("key");
     private final Object apiToken = authData.get("token");

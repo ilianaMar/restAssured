@@ -11,17 +11,16 @@ public class TestBase {
     public  RequestSpecification reqSpec;
     public  ResponseSpecification respSpec;
 
-    public RequestSpecification buildReqSpec(String baseUri, String basePath){
+    public void buildReqSpec(String baseUri, String basePath){
         reqSpec = new RequestSpecBuilder()
                 .setBaseUri(baseUri)
                 .setBasePath(basePath)
                 .addHeader("Accept", "*/*")
                 .build();
         RestAssured.requestSpecification = reqSpec;
-        return reqSpec;
     }
 
-    public  ResponseSpecification buildRespSpec() {
+    public ResponseSpecification buildRespSpec() {
         respSpec = new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
                 .build();

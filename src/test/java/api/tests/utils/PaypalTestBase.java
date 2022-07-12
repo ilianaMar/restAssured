@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class PaypalTestBase {
     public static String accessToken;
-    private static final String path = "src/test/java/api/config/paypal-auth.json";
+    private static final String path = "src/test/java/api/tests/config/paypal-auth.json";
     private static final String baseUri = "https://api.sandbox.paypal.com/";
     private static final String basePath = "v1";
     public static RequestSpecification reqSpec;
