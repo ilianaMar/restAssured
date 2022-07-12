@@ -1,8 +1,8 @@
-package api.paypalexamples;
+package api.tests.utils;
 
 import static io.restassured.RestAssured.*;
 
-import api.config.AuthHelper;
+import api.tests.config.AuthHelper;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;

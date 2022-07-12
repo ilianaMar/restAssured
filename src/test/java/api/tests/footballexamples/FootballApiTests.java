@@ -1,7 +1,8 @@
-package api.tests;
+package api.tests.footballexamples;
 
 import static io.restassured.RestAssured.*;
 
+import api.tests.utils.TestBase;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
@@ -10,14 +11,15 @@ import java.time.format.DateTimeFormatter;
 
 import static org.hamcrest.Matchers.*;
 
-public class FootballApiTests extends TestBase {
+public class FootballApiTests {
+    TestBase testBase = new TestBase();
 
-    @BeforeAll
-    public static void setup() {
+    @BeforeEach
+    public void setup() {
         String baseUri = "https://api.football-data.org/";
         String basePath = "/v4/";
-        init(baseUri, basePath);
-        respSpec.statusCode(200);
+        testBase.buildReqSpec(baseUri, basePath);
+        testBase.buildRespSpec().statusCode(200);
     }
 
     @Test

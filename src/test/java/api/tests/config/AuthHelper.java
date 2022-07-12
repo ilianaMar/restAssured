@@ -1,4 +1,4 @@
-package api.config;
+package api.tests.config;
 
 import com.google.gson.Gson;
 

@@ -1,5 +1,6 @@
-package api.paypalexamples;
+package api.tests.paypalexamples;
 
+import api.tests.utils.PaypalTestBase;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
 

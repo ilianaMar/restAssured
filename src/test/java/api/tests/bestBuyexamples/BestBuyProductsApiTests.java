@@ -1,5 +1,6 @@
-package api.tests;
+package api.tests.bestBuyexamples;
 
+import api.tests.utils.TestBase;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.*;
 
@@ -9,15 +10,16 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
-public class BestBuyProductsApiTests extends TestBase {
+public class BestBuyProductsApiTests {
     static String jsonResponse;
+    TestBase testBase = new TestBase();
 
-    @BeforeAll
-    public static void setup() {
+    @BeforeEach
+    public void setup() {
         String baseUri = "http://localhost:3030/";
         String basePath = "";
-        init(baseUri, basePath);
-        respSpec.statusCode(200);
+        testBase.buildRespSpec().statusCode(200);
+        testBase.buildReqSpec(baseUri, basePath);
         jsonResponse = given().when().get("products").asString();
     }
 

@@ -1,5 +1,6 @@
-package api.tests;
+package api.tests.bestBuyexamples;
 
+import api.tests.utils.TestBase;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.*;
 
@@ -8,15 +9,16 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
-public class BestBuyStoresApiTests extends TestBase {
+public class BestBuyStoresApiTests {
     static ValidatableResponse validatableResponse;
+    TestBase testBase = new TestBase();
 
-    @BeforeAll
-    public static void setup() {
+    @BeforeEach
+    public void setup() {
         String baseUri = "http://localhost:3030/";
         String basePath = "";
-        init(baseUri, basePath);
-        respSpec.statusCode(200);
+        testBase.buildRespSpec().statusCode(200);
+        testBase.buildReqSpec(baseUri, basePath);
         validatableResponse = given().when().get("stores").then();
     }
 
