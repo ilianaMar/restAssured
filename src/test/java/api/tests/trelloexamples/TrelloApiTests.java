@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.*;
 import org.junit.jupiter.api.TestClassOrder;
 
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
-public class TrelloApiTests  {
+public class TrelloApiTests {
     private final String path = "src/test/java/api/tests/config/trello-auth.json";
     private final Map<?, ?> authData = new AuthHelper(path).getJson();
     private final Object apiKey = authData.get("key");
@@ -38,7 +38,7 @@ public class TrelloApiTests  {
 
     @Nested
     @Order(1)
-    @DisplayName("Get all boards with trello api key and token")
+    @DisplayName("Get all user boards with trello api key and token")
     class UseRestAssuredJsonPathTests {
         ExtractableResponse<Response> response;
 
@@ -139,7 +139,7 @@ public class TrelloApiTests  {
 
     @Nested
     @Order(2)
-    @DisplayName("use harmcrest matchers")
+    @DisplayName("Get all user boards and use harmcrest matchers")
     class UseHarmcrestMatchersTests {
         Response response;
 
@@ -214,7 +214,7 @@ public class TrelloApiTests  {
 
     @Nested
     @Order(3)
-    @DisplayName("use json assert method")
+    @DisplayName("Get all user boards and use json assert method")
     class UseJsonAssertTests {
         Response response;
 
@@ -277,7 +277,7 @@ public class TrelloApiTests  {
 
     @Nested
     @Order(4)
-    @DisplayName("use requestWriter and requestCapture")
+    @DisplayName("Get all user boards and use requestWriter and requestCapture")
     class UseFiltersTests {
         Response response;
 
@@ -303,11 +303,11 @@ public class TrelloApiTests  {
 
     @Nested
     @Order(5)
-    @DisplayName("Add sample with oauth1")
+    @DisplayName("Trello sample with oauth1 authorization")
     class UseOauth1AuthTests {
 
         @Test
-        @DisplayName("Get my account info")
+        @DisplayName("Get user account info")
         void getUserTrelloInfo() {
             given()
                     .auth()
