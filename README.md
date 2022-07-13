@@ -57,7 +57,7 @@
 - Used POJO to build response payload
 
 ### ALLURE REPORTS
-- Install locally allure depends on your find information https://docs.qameta.io/allure/#_installing_a_commandline
+- Install locally allure depends on your OS. You can find more information https://docs.qameta.io/allure/#_installing_a_commandline
 - Delete target directory 
 - Run **mvn clean test** for all tests or run **mvn clean test -Dtest="NameOFTest"** for example
   **mvn clean test -Dtest="BestBuyProductsApiTests"**
