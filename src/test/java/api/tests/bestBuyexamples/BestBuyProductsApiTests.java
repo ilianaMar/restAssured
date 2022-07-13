@@ -5,6 +5,7 @@ import com.jayway.jsonpath.JsonPath;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Link;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.*;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class BestBuyProductsApiTests {
     static String jsonResponse;
     TestBase testBase = new TestBase();
 
+
     @BeforeEach
     public void setup() {
         String baseUri = "http://localhost:3030/";
@@ -32,7 +34,8 @@ public class BestBuyProductsApiTests {
 
     @Test
     @DisplayName("Get the root element")
-    void testGetRootElement() {
+    @Step("Test Step sample")
+    public void testGetRootElement() {
         Map<String, ?> rootElement = JsonPath.read(jsonResponse, "$");
         System.out.println(rootElement.toString());
     }

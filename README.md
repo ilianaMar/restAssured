@@ -58,6 +58,8 @@
 
 ### ALLURE REPORTS
 - Install locally allure depends on your find information https://docs.qameta.io/allure/#_installing_a_commandline
-- Delete target directory and run mvn clean test
+- Delete target directory 
+- Run **mvn clean test** for all tests or run **mvn clean test -Dtest="NameOFTest"** for example
+  **mvn clean test -Dtest="BestBuyProductsApiTests"**
 - Open terminal and open target directory 
-- Run command *allure serve allure-results* in terminal to build report graphs 
+- Run command **allure serve allure-results** in terminal to build report graphs 
