@@ -34,7 +34,7 @@
    - Create a file called trello-auth.json and use template src/test/java/api/tests/config/trello-auth.json.dist to add 
      authorisation data
    - Create some dashboard from UI to generate test data
-- Path src/test/java/api/trelloexamples/TrelloApiTests.java:  Sample with key and token headers authorization
+- Path src/test/java/api/tests/trelloexamples/TrelloApiTests.java:  Sample with key and token headers authorization
   and Oauth 1.0 authorization
 - Used libraries:
     - Static methods of org.hamcrest.Matchers.* for assertions
