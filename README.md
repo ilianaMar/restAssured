@@ -1,14 +1,14 @@
 # Rest Assured Examples
 
 ### FOOTBALL API TESTS
- - Path src/test/java/api/tests/FootballApiTests.java
+ - Path src/test/java/api/tests/footballexamples/FootballApiTests.java
  - Used libraries: 
    - Static methods of org.hamcrest.Matchers.* for assertions
    - Static methods of io.restassured.RestAssured.*
    - io.restassured.response.Response
 
 ### PLACE API TESTS
-- Path  src/test/java/api/tests/PlaceApiTests.java
+- Path  src/test/java/api/tests/placeexamples/PlaceApiTests.java
 - Use libraries:
     - Static methods of org.hamcrest.Matchers.* for assertions
     - Static methods of io.restassured.RestAssured.*
@@ -19,11 +19,11 @@
 - Preconditions:
    - Clone repo using the guidelines https://github.com/BestBuy/api-playground
    - Start the application
-- Path src/test/java/api/tests/BesBuyStoresApiTests.java
+- Path src/test/java/api/tests/bestBuyexamples/BesBuyStoresApiTests.java
 - Used libraries:
     - Static methods of org.hamcrest.Matchers.* for assertions
     - Json path of restassure for Json extractions of response body
-- Path  src/test/java/api/tests/BesBuyProductsApiTests.java
+- Path  src/test/java/api/tests/bestBuyexamples/BesBuyProductsApiTests.java
 - Used libraries:
     - Static methods of org.hamcrest.Matchers.* for assertions
     - com.jayway.jsonpath.JsonPath for Json extractions of response body
@@ -31,11 +31,11 @@
 ### TRELLO API TESTS
 - Preconditions: 
    - Create trello account and generate key, secret and token
-   - Create a file called trello-auth.json and use template src/test/java/api/config/trello-auth.json.dist to add 
+   - Create a file called trello-auth.json and use template src/test/java/api/tests/config/trello-auth.json.dist to add 
      authorisation data
    - Create some dashboard from UI to generate test data
-- Path src/test/java/api/trelloexamples/TrelloApiTests.java - Sample with key and token headers authorization
-- Path src/test/java/api/trelloexamples/TrelloApiWithOath1Tests.java - Sample with Oauth 1.0 authorization
+- Path src/test/java/api/tests/trelloexamples/TrelloApiTests.java:  Sample with key and token headers authorization
+  and Oauth 1.0 authorization
 - Used libraries:
     - Static methods of org.hamcrest.Matchers.* for assertions
     - Static methods of io.restassured.RestAssured.*
@@ -48,10 +48,18 @@
 ### PAYPAL API TESTS
 - Preconditions:
     - Create paypal developer account and generate client_id and client_secret
-    - Create a file called paypal-auth.json and use template src/test/java/api/config/paypal-auth.json.dist to add
+    - Create a file called paypal-auth.json and use template src/test/java/api/tests/config/paypal-auth.json.dist to add
       authorisation data
 - Path src/test/java/api/paypalexamples/*
 - Used libraries:
     - Static methods of io.restassured.RestAssured.*
     - io.restassured.response.Response
 - Used POJO to build response payload
+
+### ALLURE REPORTS
+- Install locally allure depends on your OS. You can find more information https://docs.qameta.io/allure/#_installing_a_commandline
+- Delete target directory 
+- Run **mvn clean test** for all tests or run **mvn clean test -Dtest="NameOFTest"** for example
+  **mvn clean test -Dtest="BestBuyProductsApiTests"**
+- Open terminal and open target directory 
+- Run command **allure serve allure-results** in terminal to build report graphs 

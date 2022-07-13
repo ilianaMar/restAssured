@@ -1,6 +1,11 @@
-package api.tests;
+package api.tests.bestBuyexamples;
 
+import api.tests.utils.TestBase;
 import com.jayway.jsonpath.JsonPath;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Link;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.*;
 
 import java.util.HashMap;
@@ -9,21 +14,28 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
-public class BestBuyProductsApiTests extends TestBase {
+@Epic("### Best Buy Api ###")
+@Feature("Products tests")
+@DisplayName("Best Buy Products Api Tests")
+@Link("https://github.com/BestBuy/api-playground")
+public class BestBuyProductsApiTests {
     static String jsonResponse;
+    TestBase testBase = new TestBase();
 
-    @BeforeAll
-    public static void setup() {
+
+    @BeforeEach
+    public void setup() {
         String baseUri = "http://localhost:3030/";
         String basePath = "";
-        init(baseUri, basePath);
-        respSpec.statusCode(200);
+        testBase.buildRespSpec().statusCode(200);
+        testBase.buildReqSpec(baseUri, basePath);
         jsonResponse = given().when().get("products").asString();
     }
 
     @Test
     @DisplayName("Get the root element")
-    void testGetRootElement() {
+    @Step("Test Step sample")
+    public void testGetRootElement() {
         Map<String, ?> rootElement = JsonPath.read(jsonResponse, "$");
         System.out.println(rootElement.toString());
     }

@@ -1,6 +1,7 @@
-package api.tests;
+package api.tests.placeexamples;
 
 import api.models.PlaceModel;
+import api.tests.utils.TestBase;
 import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -15,24 +16,22 @@ import java.util.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PlaceApiTests extends TestBase {
+@DisplayName("Place Api Tests")
+public class PlaceApiTests {
     String placeId;
     Faker faker;
     Response postResponse;
     Map<String, Object> payloadData;
     PlaceModel newPlace;
-
-    @BeforeAll
-    public static void setup() {
-        String baseUri = "https://rahulshettyacademy.com";
-        String basePath = "/maps/api/place/";
-        init(baseUri, basePath);
-    }
+    TestBase testBase = new TestBase();
 
     @BeforeEach
     public void createPlace() {
         faker = new Faker();
         List<String> types = new ArrayList<>();
+        String baseUri = "https://rahulshettyacademy.com";
+        String basePath = "/maps/api/place/";
+        testBase.buildReqSpec(baseUri, basePath);
         types.add("shoe park");
         types.add("shop");
 
@@ -74,9 +73,9 @@ public class PlaceApiTests extends TestBase {
     }
 
     @Test
+    @Order(2)
     @DisplayName("Test to create a new place")
     void testWithPostRequest() {
-        postResponse.then().spec(respSpec);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
         postResponse.prettyPrint();
@@ -111,9 +110,9 @@ public class PlaceApiTests extends TestBase {
     }
 
     @Test
+    @Order(1)
     @DisplayName("Test to delete a created place")
     void testWithDeleteRequest() {
-        postResponse.then().statusCode(200);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
         Map<String, Object> deleteData = new HashMap<>();
@@ -127,20 +126,10 @@ public class PlaceApiTests extends TestBase {
                 .statusCode(200)
                 .assertThat().body("status", equalTo("OK"));
         deleteResponse.prettyPrint();
-
-        Response getResponse = given()
-                .contentType(ContentType.JSON)
-                .queryParams("key", "qaclick123", "place_id", placeId)
-                .when()
-                .get("get/json");
-        getResponse.then()
-                .statusCode(404)
-                .assertThat()
-                .body("msg", equalTo("Get operation failed, looks like place_id  doesn't exists"));
-        getResponse.prettyPrint();
     }
 
     @Test
+    @Order(3)
     @DisplayName("Test to update a created place")
     void testWithUpdateRequest() {
         postResponse.then().statusCode(200);

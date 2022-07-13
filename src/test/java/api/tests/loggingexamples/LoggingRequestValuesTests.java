@@ -1,15 +1,12 @@
-package api.loggingexamples;
+package api.tests.loggingexamples;
 
 import api.models.PlaceModel;
-import api.tests.TestBase;
+import api.tests.utils.TestBase;
 import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.path.json.JsonPath;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,23 +14,23 @@ import java.util.List;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 
-public class LoggingRequestValuesTests extends TestBase {
+@DisplayName("Logging Request Values Api Tests")
+public class LoggingRequestValuesTests {
     String placeId;
     Faker faker;
     Response postResponse;
     PlaceModel newPlace;
-
-    @BeforeAll
-    public static void setup() {
-        String baseUri = "https://rahulshettyacademy.com";
-        String basePath = "/maps/api/place/";
-        init(baseUri, basePath);
-    }
+    TestBase testBase = new TestBase();
 
     @BeforeEach
     public void createPlace() {
+        String baseUri = "https://rahulshettyacademy.com";
+        String basePath = "/maps/api/place/";
         faker = new Faker();
         List<String> types = new ArrayList<>();
+        testBase.buildRespSpec().statusCode(200);
+        testBase.buildReqSpec(baseUri, basePath);
+
         types.add("shoe park");
         types.add("shop");
         PlaceModel.Location loc = new PlaceModel.Location();
@@ -63,7 +60,6 @@ public class LoggingRequestValuesTests extends TestBase {
     @Test
     @DisplayName("Print request headers")
     public void test001() {
-        postResponse.then().spec(respSpec);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 
@@ -82,7 +78,6 @@ public class LoggingRequestValuesTests extends TestBase {
     @Test
     @DisplayName("Print request params")
     public void test002() {
-        postResponse.then().spec(respSpec);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 
@@ -101,7 +96,6 @@ public class LoggingRequestValuesTests extends TestBase {
     @Test
     @DisplayName("Print request body")
     public void test003() {
-        postResponse.then().spec(respSpec);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 
@@ -127,7 +121,6 @@ public class LoggingRequestValuesTests extends TestBase {
     @Test
     @DisplayName("Print request all details")
     public void test004() {
-        postResponse.then().spec(respSpec);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 
@@ -153,7 +146,6 @@ public class LoggingRequestValuesTests extends TestBase {
     @Test
     @DisplayName("Print request all details if request is failed")
     public void test005() {
-        postResponse.then().spec(respSpec);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 

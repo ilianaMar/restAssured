@@ -1,10 +1,12 @@
-package api.paypalexamples;
+package api.tests.paypalexamples;
 
+import api.tests.utils.PaypalTestBase;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
 
+@DisplayName("Paypal Api Tests Sample#2")
 public class PostAsStringTests extends PaypalTestBase {
     @BeforeAll
     public static void setup() {

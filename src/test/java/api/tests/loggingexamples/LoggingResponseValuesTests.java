@@ -1,38 +1,34 @@
-package api.loggingexamples;
+package api.tests.loggingexamples;
 
 import api.models.PlaceModel;
-import api.tests.TestBase;
+import api.tests.utils.TestBase;
 import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class LoggingResponseValuesTests extends TestBase {
+@DisplayName("Logging Response Values Api Tests")
+public class LoggingResponseValuesTests {
     String placeId;
     Faker faker;
     Response postResponse;
     PlaceModel newPlace;
-
-    @BeforeAll
-    public static void setup() {
-        String baseUri = "https://rahulshettyacademy.com";
-        String basePath = "/maps/api/place/";
-        init(baseUri, basePath);
-    }
+    TestBase testBase = new TestBase();
 
     @BeforeEach
     public void createPlace() {
+        String baseUri = "https://rahulshettyacademy.com";
+        String basePath = "/maps/api/place/";
         faker = new Faker();
         List<String> types = new ArrayList<>();
+        testBase.buildRespSpec().statusCode(200);
+        testBase.buildReqSpec(baseUri, basePath);
         types.add("shoe park");
         types.add("shop");
         PlaceModel.Location loc = new PlaceModel.Location();
@@ -62,7 +58,6 @@ public class LoggingResponseValuesTests extends TestBase {
     @Test
     @DisplayName("Print response headers")
     public void test001() {
-        postResponse.then().spec(respSpec);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 
@@ -81,7 +76,6 @@ public class LoggingResponseValuesTests extends TestBase {
     @Test
     @DisplayName("Print response status line")
     public void test002() {
-        postResponse.then().spec(respSpec);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 
@@ -100,7 +94,6 @@ public class LoggingResponseValuesTests extends TestBase {
     @Test
     @DisplayName("Print response body")
     public void test003() {
-        postResponse.then().spec(respSpec);
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 

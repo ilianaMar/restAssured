@@ -1,6 +1,8 @@
-package api.paypalexamples;
+package api.tests.paypalexamples;
 
 import api.models.paypal.*;
+import api.tests.utils.PaypalTestBase;
+import io.qameta.allure.Link;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
 
@@ -9,6 +11,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
+@DisplayName("Paypal Api Tests Sample#1")
 public class PostAsObjectTests extends PaypalTestBase {
     static String paymentId;
 

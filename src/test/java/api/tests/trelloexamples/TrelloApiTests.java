@@ -1,7 +1,8 @@
-package api.trelloexamples;
+package api.tests.trelloexamples;
 
-import api.config.AuthHelper;
-import api.tests.TestBase;
+import api.tests.config.AuthHelper;
+import api.tests.utils.TestBase;
+import io.qameta.allure.Step;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ExtractableResponse;
@@ -17,31 +18,37 @@ import java.util.Map;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class TrelloApiTests extends TestBase {
+import org.junit.jupiter.api.TestClassOrder;
 
-    @BeforeAll
-    public static void setup() {
-        String path = "src/test/java/api/config/trello-auth.json";
-        Map<?, ?> authData = new AuthHelper(path).getJson();
-        Object apiKey = authData.get("key");
-        Object apiToken = authData.get("token");
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
+public class TrelloApiTests {
+    private final String path = "src/test/java/api/tests/config/trello-auth.json";
+    private final Map<?, ?> authData = new AuthHelper(path).getJson();
+    private final Object apiKey = authData.get("key");
+    private final Object apiToken = authData.get("token");
+    private final Object apiSecret = authData.get("secret");
+    TestBase testBase = new TestBase();
+
+    @BeforeEach
+    void invokeGetApi() {
         String baseUri = "https://api.trello.com/";
-        String basePath = "1/members/me/";
-        init(baseUri, basePath);
-        respSpec.statusCode(200);
-        reqSpec.queryParams("fields", "name,url", "key", apiKey, "token", apiToken);
+        String basePath = "1/members/";
+        testBase.buildReqSpec(baseUri, basePath);
+        testBase.buildRespSpec().statusCode(200);
     }
 
     @Nested
-    @DisplayName("Get all boards with trello api key and token")
+    @Order(1)
+    @DisplayName("Get all user boards with trello api key and token")
     class UseRestAssuredJsonPathTests {
         ExtractableResponse<Response> response;
 
         @BeforeEach
         void invokeGetApi() {
             response = given()
+                    .queryParams("fields", "name,url", "key", apiKey, "token", apiToken)
                     .when()
-                    .get("boards")
+                    .get("me/boards")
                     .then()
                     .extract();
         }
@@ -132,15 +139,17 @@ public class TrelloApiTests extends TestBase {
     }
 
     @Nested
-    @DisplayName("use harmcrest matchers")
+    @Order(2)
+    @DisplayName("Get all user boards and use harmcrest matchers")
     class UseHarmcrestMatchersTests {
         Response response;
 
         @BeforeEach
         void invokeGetApi() {
             response = given()
+                    .queryParams("fields", "name,url", "key", apiKey, "token", apiToken)
                     .when()
-                    .get("boards");
+                    .get("me/boards");
         }
 
         @Test
@@ -205,15 +214,17 @@ public class TrelloApiTests extends TestBase {
     }
 
     @Nested
-    @DisplayName("use json assert method")
+    @Order(3)
+    @DisplayName("Get all user boards and use json assert method")
     class UseJsonAssertTests {
         Response response;
 
         @BeforeEach
         void invokeGetApi() {
             response = given()
+                    .queryParams("fields", "name,url", "key", apiKey, "token", apiToken)
                     .when()
-                    .get("boards");
+                    .get("me/boards");
         }
 
         @DisplayName("#6")
@@ -266,18 +277,19 @@ public class TrelloApiTests extends TestBase {
     }
 
     @Nested
-    @DisplayName("use requestWriter and requestCaptire")
+    @Order(4)
+    @DisplayName("Get all user boards and use requestWriter and requestCapture")
     class UseFiltersTests {
         Response response;
 
         @BeforeEach
         void invokeGetApi() {
             response = given()
+                    .queryParams("fields", "name,url", "key", apiKey, "token", apiToken)
                     .filter(new RequestLoggingFilter())
                     .filter(new ResponseLoggingFilter())
                     .when()
-                    .get("boards");
-
+                    .get("me/boards");
         }
 
         @Test
@@ -288,5 +300,28 @@ public class TrelloApiTests extends TestBase {
                     .body("size()", equalTo(3))
                     .statusCode(200);
         }
+    }
+
+    @Nested
+    @Order(5)
+    @DisplayName("Trello sample with oauth1 authorization")
+    class UseOauth1AuthTests {
+
+        @Test
+        @DisplayName("Get user account info")
+        void getUserTrelloInfo() {
+            given()
+                    .auth()
+                    .oauth(apiKey.toString(), apiSecret.toString(), apiToken.toString(), apiSecret.toString())
+                    .log()
+                    .all()
+                    .get("me")
+                    .then()
+                    .log()
+                    .all()
+                    .assertThat()
+                    .body("fullName", equalTo("Iliana Markova"));
+        }
+
     }
 }
