@@ -1,6 +1,6 @@
 package api.tests.loggingexamples;
 
-import api.models.PlaceModel;
+import api.models.place.*;
 import api.tests.utils.TestBase;
 import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
@@ -19,7 +19,7 @@ public class LoggingRequestValuesTests {
     String placeId;
     Faker faker;
     Response postResponse;
-    PlaceModel newPlace;
+    Place newPlace;
     TestBase testBase = new TestBase();
 
     @BeforeEach
@@ -33,11 +33,11 @@ public class LoggingRequestValuesTests {
 
         types.add("shoe park");
         types.add("shop");
-        PlaceModel.Location loc = new PlaceModel.Location();
+        Location loc = new Location();
         loc.setLat(-38.383494);
         loc.setLng(33.427362);
 
-        newPlace = PlaceModel.builder()
+        newPlace = Place.builder()
                 .location(loc)
                 .language("French-IN")
                 .name(String.format("%s %s", faker.name().firstName(), faker.name().lastName()))
@@ -99,7 +99,7 @@ public class LoggingRequestValuesTests {
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 
-        PlaceModel updatePlace = PlaceModel.builder()
+        Place updatePlace = Place.builder()
                 .placeId(placeId)
                 .address(faker.address().streetAddress())
                 .key("qaclick123")
@@ -124,7 +124,7 @@ public class LoggingRequestValuesTests {
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 
-        PlaceModel updatePlace = PlaceModel.builder()
+        Place updatePlace = Place.builder()
                 .placeId(placeId)
                 .address(faker.address().streetAddress())
                 .key("qaclick123")
@@ -149,7 +149,7 @@ public class LoggingRequestValuesTests {
         JsonPath postJsonPathEvaluator = postResponse.jsonPath();
         placeId = postJsonPathEvaluator.get("place_id");
 
-        PlaceModel updatePlace = PlaceModel.builder()
+        Place updatePlace = Place.builder()
                 .placeId(placeId)
                 .address(faker.address().streetAddress())
                 .key("qaclick123")

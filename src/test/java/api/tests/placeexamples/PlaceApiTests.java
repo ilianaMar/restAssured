@@ -1,6 +1,6 @@
 package api.tests.placeexamples;
 
-import api.models.PlaceModel;
+import api.models.place.*;
 import api.tests.utils.TestBase;
 import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
@@ -22,7 +22,7 @@ public class PlaceApiTests {
     Faker faker;
     Response postResponse;
     Map<String, Object> payloadData;
-    PlaceModel newPlace;
+    Place newPlace;
     TestBase testBase = new TestBase();
 
     @BeforeEach
@@ -48,11 +48,11 @@ public class PlaceApiTests {
 //        payloadData.put("website", "http://google.com");
 //        payloadData.put("language", "French-IN");
 
-        PlaceModel.Location loc = new PlaceModel.Location();
+        Location loc = new Location();
         loc.setLat(-38.383494);
         loc.setLng(33.427362);
 
-        newPlace = PlaceModel.builder()
+        newPlace = Place.builder()
                 .location(loc)
                 .language("French-IN")
                 .name(String.format("%s %s", faker.name().firstName(), faker.name().lastName()))
@@ -142,7 +142,7 @@ public class PlaceApiTests {
 //        updateData.put("address", faker.address().streetAddress());
 //        updateData.put("key", "qaclick123");
 
-        PlaceModel updatePlace = PlaceModel.builder()
+        Place updatePlace = Place.builder()
                 .placeId(placeId)
                 .address(faker.address().streetAddress())
                 .key("qaclick123")
