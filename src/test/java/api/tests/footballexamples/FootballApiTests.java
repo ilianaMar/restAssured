@@ -2,22 +2,27 @@ package api.tests.footballexamples;
 
 import static io.restassured.RestAssured.*;
 
+import api.tests.utils.JsonHelper;
 import api.tests.utils.TestBase;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
 
 @DisplayName("Football Api Tests")
 public class FootballApiTests {
     TestBase testBase = new TestBase();
+    private final String urlPath = "src/test/java/api/tests/config/basic-urls.json";
+    private final Map<?, ?> basicUrlData = new JsonHelper(urlPath).getJson();
+    private final Object footballBaseUrl = basicUrlData.get("footballUrl");
 
     @BeforeEach
     public void setup() {
-        String baseUri = "https://api.football-data.org/";
+        String baseUri = footballBaseUrl.toString();
         String basePath = "/v4/";
         testBase.buildReqSpec(baseUri, basePath);
         testBase.buildRespSpec().statusCode(200);

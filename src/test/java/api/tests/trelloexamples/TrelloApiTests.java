@@ -1,8 +1,7 @@
 package api.tests.trelloexamples;
 
-import api.tests.config.AuthHelper;
+import api.tests.utils.JsonHelper;
 import api.tests.utils.TestBase;
-import io.qameta.allure.Step;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ExtractableResponse;
@@ -22,16 +21,19 @@ import org.junit.jupiter.api.TestClassOrder;
 
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
 public class TrelloApiTests {
-    private final String path = "src/test/java/api/tests/config/trello-auth.json";
-    private final Map<?, ?> authData = new AuthHelper(path).getJson();
+    private final String authPath = "src/test/java/api/tests/config/trello-auth.json";
+    private final Map<?, ?> authData = new JsonHelper(authPath).getJson();
+    private final String urlPath = "src/test/java/api/tests/config/basic-urls.json";
+    private final Map<?, ?> basicUrlData = new JsonHelper(urlPath).getJson();
     private final Object apiKey = authData.get("key");
     private final Object apiToken = authData.get("token");
     private final Object apiSecret = authData.get("secret");
+    private final Object trelloBaseUrl = basicUrlData.get("trelloUrl");
     TestBase testBase = new TestBase();
 
     @BeforeEach
     void invokeGetApi() {
-        String baseUri = "https://api.trello.com/";
+        String baseUri = trelloBaseUrl.toString();
         String basePath = "1/members/";
         testBase.buildReqSpec(baseUri, basePath);
         testBase.buildRespSpec().statusCode(200);

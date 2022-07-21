@@ -2,7 +2,6 @@ package api.tests.utils;
 
 import static io.restassured.RestAssured.*;
 
-import api.tests.config.AuthHelper;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -35,7 +34,7 @@ public class PaypalTestBase {
 
     public static void generateToken() {
         init();
-        Map<?, ?> paypalAuthData = new AuthHelper(path).getJson();
+        Map<?, ?> paypalAuthData = new JsonHelper(path).getJson();
         Object paypalClientId = paypalAuthData.get("client_id");
         Object paypalClientSecret = paypalAuthData.get("client_secret");
 

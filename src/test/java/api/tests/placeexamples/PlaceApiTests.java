@@ -1,6 +1,7 @@
 package api.tests.placeexamples;
 
 import api.models.place.*;
+import api.tests.utils.JsonHelper;
 import api.tests.utils.TestBase;
 import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
@@ -24,12 +25,15 @@ public class PlaceApiTests {
     Map<String, Object> payloadData;
     Place newPlace;
     TestBase testBase = new TestBase();
+    private final String urlPath = "src/test/java/api/tests/config/basic-urls.json";
+    private final Map<?, ?> basicUrlData = new JsonHelper(urlPath).getJson();
+    private final Object placeBaseUrl = basicUrlData.get("placeUrl");
 
     @BeforeEach
     public void createPlace() {
         faker = new Faker();
         List<String> types = new ArrayList<>();
-        String baseUri = "https://rahulshettyacademy.com";
+        String baseUri = placeBaseUrl.toString();
         String basePath = "/maps/api/place/";
         testBase.buildReqSpec(baseUri, basePath);
         types.add("shoe park");

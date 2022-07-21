@@ -1,6 +1,7 @@
 package api.tests.loggingexamples;
 
 import api.models.place.*;
+import api.tests.utils.JsonHelper;
 import api.tests.utils.TestBase;
 import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,10 +23,13 @@ public class LoggingRequestValuesTests {
     Response postResponse;
     Place newPlace;
     TestBase testBase = new TestBase();
+    private final String urlPath = "src/test/java/api/tests/config/basic-urls.json";
+    private final Map<?, ?> basicUrlData = new JsonHelper(urlPath).getJson();
+    private final Object placeBaseUrl = basicUrlData.get("placeUrl");
 
     @BeforeEach
     public void createPlace() {
-        String baseUri = "https://rahulshettyacademy.com";
+        String baseUri = placeBaseUrl.toString();
         String basePath = "/maps/api/place/";
         faker = new Faker();
         List<String> types = new ArrayList<>();

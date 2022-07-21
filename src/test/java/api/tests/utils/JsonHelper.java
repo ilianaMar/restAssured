@@ -1,4 +1,4 @@
-package api.tests.config;
+package api.tests.utils;
 
 import com.google.gson.Gson;
 
@@ -7,15 +7,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 
-public class AuthHelper {
+public class JsonHelper {
     String path;
 
-    public AuthHelper(String filePath) {
+    public JsonHelper(String filePath) {
         this.path = filePath;
     }
 
     public Map<?, ?> getJson(){
-        Map<?, ?> authData = null;
+        Map<?, ?> data = null;
         try {
             // create Gson instance
             Gson gson = new Gson();
@@ -24,7 +24,7 @@ public class AuthHelper {
             Reader reader = Files.newBufferedReader(Paths.get(path));
 
             // convert JSON file to map
-            authData = gson.fromJson(reader, Map.class);
+            data = gson.fromJson(reader, Map.class);
 
             // close reader
             reader.close();
@@ -33,6 +33,6 @@ public class AuthHelper {
             ex.printStackTrace();
         }
 
-        return authData;
+        return data;
     }
 }
